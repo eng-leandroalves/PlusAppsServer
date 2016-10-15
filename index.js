@@ -47,7 +47,7 @@ var api = new ParseServer({
           // The address that your emails come from
           fromAddress: 'postmaster@plusapps.com.br',
           // Your domain from mailgun.com
-          domain: 'plusapps.com.br',
+          domain: 'app0993a99a6e2f4234b9aa1522fe63400d.mailgun.org',
           // Your API key from mailgun.com
           apiKey: 'key-c38ef8af2043bf2c339b64935a8080a5',
         }
