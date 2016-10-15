@@ -19,6 +19,21 @@ var api = new ParseServer({
   serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed 
   // Enable email verification
   verifyUserEmails: true,
+  // if `verifyUserEmails` is `true` and
+  //     if `emailVerifyTokenValidityDuration` is `undefined` then
+  //        email verify token never expires
+  //     else
+  //        email verify token expires after `emailVerifyTokenValidityDuration`
+  //
+  // `emailVerifyTokenValidityDuration` defaults to `undefined`
+  //
+  // email verify token below expires in 2 hours (= 2 * 60 * 60 == 7200 seconds)
+  emailVerifyTokenValidityDuration: 2 * 60 * 60, // in seconds (2 hours = 7200 seconds)
+  
+  // set preventLoginWithUnverifiedEmail to false to allow user to login without verifying their email
+  // set preventLoginWithUnverifiedEmail to true to prevent user from login if their email is not verified
+  preventLoginWithUnverifiedEmail: false, // defaults to false
+  
   // The public URL of your app.
   // This will appear in the link that is used to verify email addresses and reset passwords.
   // Set the mount path as it is in serverURL
@@ -32,7 +47,7 @@ var api = new ParseServer({
           // The address that your emails come from
           fromAddress: 'postmaster@plusapps.com.br',
           // Your domain from mailgun.com
-          domain: 'plusapps.com.br.mailgun.org',
+          domain: 'email.plusapps.com.br',
           // Your API key from mailgun.com
           apiKey: 'key-c38ef8af2043bf2c339b64935a8080a5',
         }
