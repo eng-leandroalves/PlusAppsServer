@@ -16,7 +16,27 @@ var api = new ParseServer({
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || 'myAppId',
   masterKey: process.env.MASTER_KEY || '', //Add your master key here. Keep it secret!
-  serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
+  serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed 
+  // Enable email verification
+  verifyUserEmails: true,
+  // The public URL of your app.
+  // This will appear in the link that is used to verify email addresses and reset passwords.
+  // Set the mount path as it is in serverURL
+  publicServerURL: 'http://plusclothes.herokuapp.com/parse',
+  // Your apps name. This will appear in the subject and body of the emails that are sent.
+  appName: 'plusclothes',
+  // The email adapter
+  emailAdapter: {
+      module: 'parse-server-simple-mailgun-adapter',
+      options: {
+          // The address that your emails come from
+          fromAddress: 'postmaster@plusapps.com.br',
+          // Your domain from mailgun.com
+          domain: 'plusapps.com.br.mailgun.org',
+          // Your API key from mailgun.com
+          apiKey: 'key-c38ef8af2043bf2c339b64935a8080a5',
+        }
+    },
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   }
